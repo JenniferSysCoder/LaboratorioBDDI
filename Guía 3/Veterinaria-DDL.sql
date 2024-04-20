@@ -1,4 +1,4 @@
-Create database if not exists Veterinaria ;
+Create database Veterinaria;
 
 use Veterinaria;
 
@@ -128,8 +128,6 @@ create table empleados(
     idCargoEmpleado int not null
 );
 
-drop table empleados;
-
 create table especialidades(
 	idEspecialidad int primary key auto_increment,
     Especialidad varchar(45) not null
@@ -139,14 +137,11 @@ create table veterinario(
 	idVeterinario int primary key auto_increment,
     nombresDoctor varchar(100) not null,
     apellidosDoctor varchar(100) not null,
-    especialidad varchar(45) not null,
     fechaInicio date not null,
     salario decimal not null,
     idEmpleado int not null,
     idEspecialidad int not null
 );
-
-drop table veterinario;
 
 create table medicamentos(
 	idMedicamentos int primary key auto_increment,
@@ -224,28 +219,27 @@ alter table empleados add foreign key (idDireccion) references direcciones(idDir
 alter table empleados add foreign key (idCargoEmpleado) references cargoEmpleados(idCargoEmpleado);
 alter table veterinario add foreign key (idEmpleado) references empleados(idEmpleado);
 alter table veterinario add foreign key (idEspecialidad) references especialidades(idEspecialidad);
-alter table cita add foreign key (idMascota) references mascotas(idMascota);
+alter table cita add foreign key (idMascota) references Mascota(idMascota);
 alter table examenes add foreign key (idHistorialesMedicos)references historialesMedicos(idHistorialesMedicos);
 alter table facturaExamenes add foreign key (idExamen) references examenes(idExamen);
 alter table facturaProcedimientos add foreign key (idProcedimiento) references procedimientos(idProcedimiento);
-alter table facturaConsulta add foreign key (idConsulta) references consulta(idConsulta);
+alter table facturaConsulta add foreign key (idConsulta) references consultas(idConsulta);
 alter table formaPagos add foreign key (idFacturaProcedimiento) references facturaProcedimientos(idFacturaProcedimiento);
 alter table formaPagos add foreign key (idFacturaConsulta) references facturaConsulta(idFacturaConsulta);
 alter table formaPagos add foreign key (idFacturaExamen) references facturaExamenes(idFacturaExamen);
 alter table historialesMedicos add foreign key (idTratamiento) references tratamientos (idTratamiento);
-alter table historialesMedicos add foreign key (idMascota) references mascotas(idMascota);
+alter table historialesMedicos add foreign key (idMascota) references Mascota(idMascota);
 alter table historialesMedicos add foreign key (idVacuna) references vacunas(idVacuna);
-/*alter table mascotas drop foreign key idPropietarios;*/
 alter table Mascota add foreign key (idPropietarios) references propietarios(idPropietarios);
 alter table Mascota add foreign key (idTipoPiel) references tiposPiel(idTipoPiel);
 alter table Mascota add foreign key(idEspecies) references especies(idEspecies);
 alter table Mascota add foreign key(idRaza) references razas(idRaza);
-alter table procedimientos add foreign key(idConsulta) references consulta(idConsulta);
+alter table procedimientos add foreign key(idConsulta) references consultas(idConsulta);
 alter table consultas add foreign key(idCita) references cita(idCita);
 alter table consultas add foreign key(idVeterinario) references veterinario(idVeterinario);
 alter table consultas add foreign key(idHistorialesMedicos) references historialesMedicos(idHistorialesMedicos);
 alter table consultas add foreign key(idExamen) references examenes(idExamen);
-alter table consultas add foreign key(idMascota) references mascotas(idMascota);
+alter table consultas add foreign key(idMascota) references Mascota(idMascota);
 alter table recetas add foreign key(idConsulta) references consultas(idConsulta);
 alter table medicamentosRecetados add foreign key(idReceta) references recetas(idReceta);
 alter table medicamentosRecetados add foreign key(idMedicamentos) references medicamentos(idMedicamentos);
