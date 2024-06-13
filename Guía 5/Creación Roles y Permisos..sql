@@ -1,4 +1,3 @@
-use veterinaria;
 
 insert into roles (rol) values
 	('SysAdmin'),
@@ -224,4 +223,3 @@ show grants for 'veter_danielReyes'@'localhost';
 show grants for 'vigi_jorgeMenjivar'@'localhost';
 show grants for 'secre_yeimiGarcia'@'localhost';
 show grants for 'rrhh_ivanAlvarado'@'localhost';
-

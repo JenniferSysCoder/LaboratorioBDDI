@@ -1,6 +1,6 @@
-Create database Veterinaria;
+create database veterinaria;
 
-use Veterinaria;
+use veterinaria;
 
 create table Mascota(
 	idMascota int primary key auto_increment,
@@ -155,7 +155,6 @@ create table recetas(
     nombreReceta varchar(45) not null,
     descripcion varchar(100) not null,
     instrucciones varchar(100) not null,
-    idMedicamentoRecetado int not null,
     idConsulta int not null
 );
 
@@ -210,6 +209,32 @@ create table formaPagos(
 );
 
 
+/*Roles*/
+
+create table roles(
+	idRol int primary key auto_increment,
+	rol varchar(50) not null
+);
+
+create table opciones(
+	idOpcion int primary key auto_increment,
+	opcion varchar(50) not null
+);
+
+create table asignacionRolesOpciones(
+	idAsignacion int primary key auto_increment,
+	idRol int not null,
+	idOpcion int not null
+);
+
+create table usuarios(
+	idUsuario int primary key auto_increment,
+    usuario varchar(50) not null,
+    contraseña varchar(50) not null,
+    idRol int not null,
+    idEmpleado int not null
+);
+
 -- Aqui estaran todas las relaciones de las llaves primarias y las foraneas
 
 alter table municipios add foreign key (idDepartemento) references departamentos(idDepartamento);
@@ -243,3 +268,9 @@ alter table consultas add foreign key(idMascota) references Mascota(idMascota);
 alter table recetas add foreign key(idConsulta) references consultas(idConsulta);
 alter table medicamentosRecetados add foreign key(idReceta) references recetas(idReceta);
 alter table medicamentosRecetados add foreign key(idMedicamentos) references medicamentos(idMedicamentos);
+
+/*Para Roles*/
+alter table asignacionRolesOpciones add foreign key(idRol) references roles(idRol);
+alter table asignacionRolesOpciones add foreign key(idOpcion) references opciones(idOpcion);
+alter table usuarios add foreign key(idRol) references roles(idRol);
+alter table usuarios add foreign key(idEmpleado) references empleados(idEmpleado);

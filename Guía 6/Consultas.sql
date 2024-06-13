@@ -1,5 +1,16 @@
 use veterinaria;
 
+select 
+em.nombresEmpleado, em.apellidosEmpleado, em.duiEmpleado, em.telefonoEmpleado, em.correoEmpleado,
+car.nombreCargoEmpleado, dir.linea1, dir.linea2, dis.distrito, mun.municipio, dep.departamento
+ from empleados em 
+ inner join cargoempleados car on em.idCargoEmpleado=car.idCargoEmpleado
+inner join direcciones dir on em.idDireccion=dir.idDireccion
+inner join distritos dis on dir.idDistrito=dis.idDistrito
+inner join municipios mun on dis.idMunicipio=mun.idMunicipio
+inner join departamentos dep on mun.idDepartemento=dep.idDepartamento;
+
+
 /*Primera Consulta*/
 /*Mostrar una lista de todas las mascotas registradas en la base de datos, así como 
 los detalles de su raza, peso, salud en general y tratamientos (si los tiene)*/
